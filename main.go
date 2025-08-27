@@ -24,6 +24,11 @@ func main() {
 	api.Post("/login", handlers.Login)
 	api.Get("/me", utils.JWTMiddleware, handlers.Me)
 
+	// transfer related
+	api.Post("/transfer", utils.JWTMiddleware, handlers.Transfer)
+	api.Get("/contacts", utils.JWTMiddleware, handlers.RecentContacts)
+	api.Get("/users/search", utils.JWTMiddleware, handlers.SearchUserByMemberCode)
+
 	app.Get("/swagger.json", func(c *fiber.Ctx) error {
 		return c.SendFile("./swagger.json")
 	})
